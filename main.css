@@ -1,0 +1,65 @@
+.title {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+}
+
+html, body,#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.esri-ui-top-left {
+    display: none;
+}
+
+.about {
+    position: absolute;
+    z-index: 2;
+    bottom: 10px;
+    left: 10px;
+    width: 20%;
+}
+
+.inner-text {
+    display: none;
+}
+
+.outer-text:hover .inner-text {
+    display: inline-block;
+}
+
+.about:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding:  0 0 0 1rem;
+}
+
+.about:hover .toggle {
+    display: none;
+}
+
+.logo {
+    position: absolute;
+    bottom: 24px;
+    right: 12px;
+}
+
+.layerListDiv {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 999999;
+    background-color: white;
+    padding: 0px 20px 30px 20px;
+}
+
+.layerListDiv .listItemContainer {
+    margin-top: 10px;
+}
+
+.layerListDiv .listItemContainer .listItem {
+    display: block;
+    padding-bottom: 4px;
+}

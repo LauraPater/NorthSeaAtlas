@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>North Sea</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/css/main.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://js.arcgis.com/4.12/"></script>
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/FeatureLayer",
+            "esri/widgets/BasemapGallery",
+            "dojo/dom",
+            "dojo/on",
+            "dojo/domReady!"
+        ], function(Map, MapView, FeatureLayer, BasemapGallery, dom, on) {
+            var map = new Map({
+                basemap: "oceans"
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [3, 56.02700],
+                zoom: 6.5
+            });
+
+            view.on("mouse-wheel", function(event) {
+                event.stopPropagation();
+            });
+
+            var northSeaClippingLayer = new FeatureLayer({
+                url: "https://services6.arcgis.com/Itk4g24j0uPe2768/arcgis/rest/services/iho/FeatureServer"
+            });
+            map.add(northSeaClippingLayer);
+
+            var eezarea = new FeatureLayer({
+                url: "https://cumulus.tnc.org/arcgis/rest/services/Atlas/MarineMaps/MapServer/16"
+            });
+
+            map.add(eezarea);
+
+			var protectedarea = new FeatureLayer ({
+				url: "https://services.arcgis.com/bDAhvQYMG4WL8O5o/arcgis/rest/services/EFH_Areas_Protected_From_Fishing/FeatureServer"
+			}); 
+			map.add(prote);
+
+            on(dom.byId("NorthSeaClippingLayerCheckBox"), "change", function() {
+                if (northSeaClippingLayer) {
+                    northSeaClippingLayer.visible = !northSeaClippingLayer.visible;
+                }
+            });
+            on(dom.byId("eezareaCheckBox"), "change", function() {
+                if (eezarea) {
+                    eezarea.visible = !eezarea.visible;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="title">
+        <h1>A North Sea Policy Atlas</h1>
+    </div>
+    <div class="layerListDiv">
+        <div class="listItemContainer">
+            <div class="listItem">
+                <input type="checkbox" class="inputItem" id="NorthSeaClippingLayerCheckBox" checked/>NorthSeaClippingLayer
+            </div>
+            <div class="listItem">
+                <input type="checkbox" class="inputItem" id="eezareaCheckBox" checked/>eezarearea
+            </div>
+        </div>
+    </div>
+    <div id="viewDiv"></div>
+    <div id="basemapGalleryDiv"></div>
+    <div class="about">
+        <p class="outer-text">
+            <br>
+            <br>About<span class="inner-text"> Author: Laura Pater, 2019. This map was part of my Bachelor Thesis to achieve the university degree of Bachelor of Science on the Wageningen university. This part should include more information about the map
+            Bachelor’s degree programme: BSW - Flexible Programme in Accordance with WHW Section 7.3c. </span></p>
+    </div>
+    <div class="logo">
+        <img src="wur.png">
+    </div>
+</body>
+
+</html>
